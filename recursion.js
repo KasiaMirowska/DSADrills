@@ -109,7 +109,7 @@ let maze = [
     [' ', ' ', ' ', ' ', ' ', ' ', 'e']
 ];
 
-function maze(arr) {
+function mazePath(arr) {
     if(arr.length === 0){
         return 'e';
     }
@@ -120,3 +120,19 @@ function maze(arr) {
 
 
 }
+
+function binary(num) {
+    if(num === 0){
+        return 0;
+    }
+    
+    if(num % 2 !== 0) {
+        return 1 + binary(num-1);
+    }
+    if(num % 2 == 0) {
+        return 0
+    }
+
+    return binary(num-1)
+}
+console.log(binary(3))
