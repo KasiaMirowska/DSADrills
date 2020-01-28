@@ -26,10 +26,7 @@ function main(){
 
 console.log(main())
 
-//why getting undefined here? 
-//what's the address : arr?
-// also if I remove _from capasity it suddenly becomes 12, why???????
-//what is ratio of pointers growing? any rules? why is it 0, 30,3,9,18,30,45?
+
 
 function urilify(str) {
     //return str.replace(\s, '%20')
@@ -74,8 +71,6 @@ console.log(urilify3('a df'))//do we have 2 iterations here?
 // f
 
 
-
-
 function filter(arr){
     let newArr = [];
     for(let i = 0; i<arr.length; i++){
@@ -87,21 +82,41 @@ function filter(arr){
 }
 console.log(filter([1,3,5,66,7,3,888,6]))
 
+function maxSum(arr) {
+    let currentSum = 0;
+    let highestSum = 0;
+
+    for(let i = 0; i < arr.length; i++) {
+        currentSum += arr[i];
+        if(currentSum >= highestSum) {
+            highestSum = currentSum;
+        }
+    }
+    return highestSum;
+}
+console.log(maxSum([4, 6, -3, 5, -2, 1]), 'MAXXXXXX')
 
 
 function merge(arr1, arr2){
-    let arr3 =[];
-    for(let i=0; i<arr1.length; i++){
-        for(let j=0; j<arr2.length; j++){
-            if(arr1[i] > arr2[j]) {
-               arr3.push(arr2[j], arr1[i])
-            }
-            else {
-                arr3.push(arr1[i], arr2[j])
-            }
-        }
+    let mergedArr = [];
+    let index1 = 0;
+    let index2 = 0;
+   
+    for(let i=0; i < (arr1.length + arr2.length); i++){
+        let unmerged1 = arr1[index1];
+        let unmerged2 = arr2[index2];
+        let isArr1Depleted = index1 >= arr1.length;
+        let isArr2Depleted = index2 >= arr2.length;
+        
+        if(!isArr1Depleted && (isArr2Depleted || unmerged1 < unmerged2)) {
+            mergedArr[i] = unmerged1;
+            index1 ++;
+        } else {
+            mergedArr[i] = unmerged2;
+            index2 ++;
+        } 
     } 
-    return arr3;
+    return mergedArr;
 }
 console.log(merge([1, 3, 6, 8, 11],[2, 3, 5, 8, 9, 10]))
 
@@ -124,3 +139,53 @@ function remove(str, str2) {
     return newStr;
 }
 console.log(remove('Battle of the Vowels: Hawaii vs. Grozny', 'aeiou'))
+
+function product(arr) {
+    let productsArr = [];
+    for (let i = 0; i < arr.length; i++) {
+        let currentProduct = 1;
+        for (let j = 0; j < arr.length; j++) {
+            if (j !== i) {
+                currentProduct = currentProduct * arr[j];
+            }
+        }
+        productsArr.push(currentProduct);
+    }
+    return productsArr;
+}
+
+console.log(product([1, 3, 9, 4]));
+
+let arr = [
+    [1,0,1,1,0],
+    [0,1,1,1,0],
+    [1,1,1,1,1],
+    [1,0,1,1,1],
+    [1,1,1,1,1]
+];
+
+function dimentional(arr) {
+    //i'm making this in order to NOT affect an original array;
+    let newArr = [];
+    for (let a = 0; a<arr.length; a++) {
+        newArr[a] = [];
+        for (let b = 0; b < arr[a].length; b++) {
+            newArr[a][b] = arr[a][b];
+        }
+    }
+    for(let i = 0; i<arr.length; i++) {
+        for(let j=0; j<arr[i].length; j++){
+            if (arr[i][j] === 0){
+                for (let k = 0; k < arr[i].length; k++ ) {
+                    newArr[i][k] = 0;
+                }
+                for(let h = 0; h< newArr.length; h++){
+                    newArr[h][j] = 0;
+                }
+            }
+        }
+        
+    }
+    return newArr;
+}
+console.log(dimentional(arr))

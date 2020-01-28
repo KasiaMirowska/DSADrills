@@ -60,21 +60,30 @@ function triangularNum(num) {
 console.log('here', triangularNum(6))
 
 
-// string = 02/02/2020
-// output ['02', '02','2020']
-
+// Separator function, first thing, what you want as output? an Array
+// The base case is when there are no "/" in the string, when that happens we want back that string as part of that array, something like:
+// ["something"] to achieve that, we could do:
+// if(str.indexOf('/') === -1){
+//   return [str];
+// }
+// Now, what happens if we have a "/" in the string? Well, we split the string to take the characters before of it and the characters after, like:
+// str.slice(0, slashPosition)
+// str.slice(slashPosition + 1)
+// The first slice(string without separator will be added to an array) the second one should be evaluated in the same way to see if there are more separators in the string, so:
+// return [str.slice(0, slashPosition), ...separator(str.slice(slashPosition + 1))]
+// Why the spread operator? Because we want to append the result of the recursive separator to the first array we have created.
+// Ending up with something like:
 function seperator(str) {
-    if(str === '') {
-        return str;
-    }
-    if(str[0] === `/`){
-        return ',' + seperator(str.slice(1));
-    }
-    return [str[0] + seperator(str.slice(1))]
-   
+  let slashPosition = str.indexOf('/');
+  if(slashPosition < 0){
+    return [str];
+  }
+  return [
+    str.slice(0, slashPosition),
+    ...seperator(str.slice(slashPosition + 1))
+  ]
 }
-console.log('string', seperator('02/02/2020'))
-
+console.log(seperator('02/02/2020'))
 function fibonaci(num) {
     if( num === 0) {
         return 0;
@@ -122,17 +131,12 @@ function mazePath(arr) {
 }
 
 function binary(num) {
-    if(num === 0){
-        return 0;
+    if(num <= 1){
+        return `${num}`;
     }
+   const activeBit = num % 2;
     
-    if(num % 2 !== 0) {
-        return 1 + binary(num-1);
-    }
-    if(num % 2 == 0) {
-        return 0
-    }
+   return Math.floor(binary(num-1/2) + activeBit);
 
-    return binary(num-1)
 }
-console.log(binary(3))
+console.log(binary(5))
