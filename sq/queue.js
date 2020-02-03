@@ -64,7 +64,9 @@ function isEmpty(queue) {
     }
     return false;
 }
-//there is no way to see full queue without loosing the elemnets inthe process
+console.log(isEmpty(starTrek))
+//there is no way to see full queue without loosing the elemnets in the process
+
 function display(queue){
     let node;
     node = queue.dequeue();
@@ -72,5 +74,6 @@ function display(queue){
       console.log(node)
       node = queue.dequeue();
     }
+    return null;
   }
-console.log(display(starTrek,'DISPLAY'));
+  //console.log(display(starTrek), 'DISPLAY');
