@@ -161,15 +161,19 @@ function display(list) {
         console.log(currNode);
         currNode = currNode.next
     }
-    console.log(currNode)
+    console.log(currNode.value)
 }
-console.log(display(outsideL), "CONTENT????")
+
+display(outsideL), console.log("CONTENT????")
 
 function isEmpty(list) {
-    if(list.head === null) {
-        return 'The list is empty'
+    if(list.head === null) // or if(!list.head) 
+    {
+       return true;
     }
+    return false
 }
+
 let testList = new LinkedList();
 console.log(isEmpty(testList))
 
@@ -177,7 +181,7 @@ function findPrevious(list, item) {
     let currNode = list.head;
     let previousNode = list.head;
     if(list.head === null) {
-        return 'The list is empty'
+        return null;
     }
     
     while(currNode.next !== null) {
@@ -185,16 +189,18 @@ function findPrevious(list, item) {
             return previousNode;
         }
         previousNode = currNode;
-        currNode = currNode.next
+        currNode = currNode.next;
     }
-    return currNode;
+    return null;
+        // Same as line 187 and we return null because we were not able to found the previous of the searched item
+        // so we return null;
 }
 console.log(findPrevious(outsideL, 'Gigi'), "FIND PREVIOUS")
 
 function findLast(list) {
     let currNode = list.head;
     if(list.head === null) {
-        return 'The list is empty'
+        return null;
     }
     while(currNode.next !== null) {
         currNode = currNode.next
@@ -203,26 +209,40 @@ function findLast(list) {
 }
 console.log(JSON.stringify(outsideL))
 console.log(findLast(outsideL), "LAST ELEMENT")
+ 
 
 function reverse(list) {
-    let currNode = list.head;
-    let prevNode = list.head;
-    if(list.head === null) {
-        return 'The list is empty'
+    //To solve this you should use a "backup" variable to keep safe the nextNode variable
+    // And another one to accumulate the reversed nodes
+    // reversed starts as null
+    // the currentNode start as the head
+    // while the currentNode is not null
+    // backup next of node so you don't miss the connection
+    // the next of the currentNode is your reversed variable
+    // the currentNode becames the reversed
+    // the next backup becames currentNode
+    //Last, you should reassing the head to the value of the reversed
+    // 1 -> 2 -> 3
+    let reversed = null;
+    let currentNode = list.head; // 1
+    while(currentNode !== null){ //2
+        let next  = currentNode.next; // 3
+        currentNode.next = reversed // 2 -> 1 -> null
+        reversed = currentNode // 2 -> 1 -> null
+        currentNode = next // 3
     }
-    while(currNode.next !== null){
-        currNode = prevNode.next
-    }
-    return {head: currNode}
+    list.head = reversed;
+    return list;
 }
-//console.log(reverse(outsideL), 'REVERSE') NOT WORKING
+console.log(reverse(outsideL), 'REVERSE') 
+
 
 function thirdFromEnd(list) {
     let currNode = list.head;
-    let previousNode = list.head;
-    let afterPrevNode = list.head;
+    let previousNode = null;
+    let afterPrevNode = null;
     if(list.head === null) {
-        return 'The list is empty'
+        return null;
     }
     while(currNode.next !== null) {
         afterPrevNode = previousNode;
@@ -233,23 +253,23 @@ function thirdFromEnd(list) {
 }
 console.log(thirdFromEnd(outsideL), "THIRD")
 
-// function middle(list) {
-//     let fastNode = list.head;
-//     let slowNode =list.head;
+function middle(list) {
+    let fastNode = list.head;
+    let slowNode =list.head;
    
-//     if(list.head === null) {
-//         return 'The list is empty'
-//     }
-//     console.log(fastNode.next)
-//     while(fastNode.next !== null && slowNode.next.next !== null) {
-//         fastNode = fastNode.next.next;
-//         slowNode = slowNode.next;
-//     }
-//     return slowNode;
+    if(list.head === null) {
+        return null;
+    }
+    console.log(fastNode.next)
+    while(fastNode && fastNode.next !== null) {
+        fastNode = fastNode.next.next;
+        slowNode = slowNode.next;
+    }
+    return slowNode;
    
-// }
-// console.log(JSON.stringify(outsideL))
-// console.log(middle(outsideL));
+}
+console.log(JSON.stringify(outsideL))
+console.log(middle(outsideL), 'MIDDLE~~~~~~~~');
 
 
 function cycleListMaker() {
@@ -262,7 +282,8 @@ function cycleListMaker() {
     while(currNode.next !== null) {
         currNode = currNode.next
     }
-     return currNode.next = new _Node('frog', currNode)
+    currNode.next = cycleList.head;
+    return cycleList;
 }
 console.log(cycleListMaker()," CYCLE??????");
 let c = cycleListMaker()
@@ -273,17 +294,17 @@ function cycleTest(list){
     console.log(list, 'CYCLE LIST?')
     let currNode = list.head;
     if(list.head === null) {
-        return 'The list is empty'
+        return null;
     }
     let valueRecord = [];
     console.log(currNode, 'UNDEFINED?????')
     while(currNode.next !== null) {
-        valueRecord.push(currNode.value);
-        currNode= currNode.next;
-        if(currNode.next === valueRecord.includes(currNode.next)) {
-            return 'there is a cycle in the list'
+        if(valueRecord.includes(currNode.value)) {
+            return true;
         }
+            valueRecord.push(currNode.value);
+            currNode= currNode.next;
     }
-    return 'the list is cycle free'
+    return false;
 }
 console.log(cycleTest(c) ,'DID I FINSh IT??????')
