@@ -89,7 +89,7 @@ function quickSort(arr, start, end) {
     }
 
     const pIndex = partition(arr, start, end); //calling partition
-    arr = quickSort(arr, start, pIndex-1);
+    arr = quickSort(arr, start, pIndex);
     arr = quickSort(arr, pIndex+1, end);
     return array;
 }
