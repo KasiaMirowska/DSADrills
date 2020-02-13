@@ -124,4 +124,12 @@ function isMatch(str){
   }
 console.log(isMatch('((())))))('))
 
+// 3 -> 2 ->5->4->12->10
+function sort(stack) {
+    let tempStack = new Stack();
+    
+   
+
+}
+
 
