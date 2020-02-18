@@ -126,7 +126,7 @@ class LinkedList {
         return currNode;
     }
 }
-
+module.exports = LinkedList;
 
 //mystery program- is it creating copies of each element of the list? or checking for duplicates?
 
