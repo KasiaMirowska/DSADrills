@@ -72,16 +72,14 @@ class BST {
         return false;
     }
 
-    // depth searches: looks brench by brench
+    // depth searches: looks branch by branch
     //in order: left, root,right
     // 2,3,12,15,28,36,39 (15 is our main root)
                                         
     dfsInOrder() {
         let result = [];
         const traverse = (node) => {
-            if(node.left) {
-                traverse(node.left)
-             } 
+            if(node.left) traverse(node.left);
             result.push(node.value);
             if(node.right) traverse(node.right);
         }

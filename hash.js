@@ -380,6 +380,7 @@ class HashMap2 {
         }
         
         let ll = this._hashTable[index];
+        
         if(!ll){
           ll = new LinkedList();
           ll.insertLast({key, value, DELETED: false})
