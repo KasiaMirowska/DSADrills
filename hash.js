@@ -1,6 +1,6 @@
 class _Node {
     constructor(value, next) {
-        this.value=value,
+        this.value=value;
         this.next=next;
     }
 }
@@ -316,7 +316,7 @@ console.log(findDuplicates('google')) //they are getting overwritten becasue the
 
 
 
-function palindrome(str) { // delete method finds/ checks i the slot is there, if it is it mean it's second one therefore it is getting deleted and we stay with one letter if the word is a palindrome
+function palindrome(str) { // delete method finds/ checks if the slot is there, if it is it means it's second one therefore it is getting deleted and we stay with one letter if the word is a palindrome
     let newMap = new HashMap();
     for(i=0; i<str.length; i++){
       try{
@@ -380,7 +380,7 @@ class HashMap2 {
         }
         
         let ll = this._hashTable[index];
-        
+
         if(!ll){
           ll = new LinkedList();
           ll.insertLast({key, value, DELETED: false})
